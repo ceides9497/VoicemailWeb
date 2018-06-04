@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Etiqueta para adaptar a @media -->
+    <LINK REL="stylesheet" TYPE="text/css" HREF="estilo.css">
+    <!-- Enlace hoja estilos -->
+    <title>Welcome</title>
+</head>
+
+<body>
+    <center>
+        <h1>Voicemail</h1>
+    </center>
+    <br>
+    <br>
+    <form name="Voicemail">
+        <h3>Enter a mailbox</h3>
+        <input type="textfield" onKeyPress="return validar(event)" name="ans" value="">
+        <br>
+        <input type="button" style="background-color: rgb(10, 187, 49); width: 37.5%;" value="Accept" onClick="location.replace('NewMessage.html')">
+        <input type="button" style="background-color: rgb(187, 45, 10); width: 37.5%;" value="Hang up" onclick="location.replace('Welcome.html')">
+        <br>
+        <input type="button" value="1" onClick="document.Voicemail.ans.value+='1'">
+        <input type="button" value="2" onClick="document.Voicemail.ans.value+='2'">
+        <input type="button" value="3" onClick="document.Voicemail.ans.value+='3'">
+        <br>
+        <input type="button" value="4" onClick="document.Voicemail.ans.value+='4'">
+        <input type="button" value="5" onClick="document.Voicemail.ans.value+='5'">
+        <input type="button" value="6" onClick="document.Voicemail.ans.value+='6'">
+        <br>
+        <input type="button" value="7" onClick="document.Voicemail.ans.value+='7'">
+        <input type="button" value="8" onClick="document.Voicemail.ans.value+='8'">
+        <input type="button" value="9" onClick="document.Voicemail.ans.value+='9'">
+        <br>
+        <input type="button" value="0" onClick="document.Voicemail.ans.value+='0'">
+    </form>
+</body>
+<script>
+    function validar(e) {
+        tecla = (document.all) ? e.keyCode : e.which;
+        if (tecla == 8) return true; //Tecla de retroceso (para poder borrar)
+        if (tecla == 44) return true; //Coma ( En este caso para diferenciar los decimales )
+        if (tecla == 48) return true;
+        if (tecla == 49) return true;
+        if (tecla == 50) return true;
+        if (tecla == 51) return true;
+        if (tecla == 52) return true;
+        if (tecla == 53) return true;
+        if (tecla == 54) return true;
+        if (tecla == 55) return true;
+        if (tecla == 56) return true;
+        patron = /1/; //ver nota
+        te = String.fromCharCode(tecla);
+        return patron.test(te);
+    }
+</script>
+
+</html>

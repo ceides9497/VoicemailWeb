@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Etiqueta para adaptar a @media -->
+    <LINK REL="stylesheet" TYPE="text/css" HREF="estilo.css">
+    <!-- Enlace hoja estilos -->
+    <title>Mailbox Menu</title>
+</head>
+
+<body>
+    <center>
+        <h1>Voicemail</h1>
+    </center>
+    <br>
+    <br>
+    <form name="Voicemail">
+        <br>
+        <input type="button" style="width: 75%" value="Listen your messages" onclick="location.replace('MessageMenu.html')">
+        <br>
+        <input type="button" id="botonChangePasscode" style="width: 75%" value="Change your passcode">
+        <br>
+        <input type="button" id="botonChangeGreeting" style="width: 75%" value="Change your greeting">
+        <br>
+        <br>
+        <input type="button" style="background-color: rgb(10, 187, 49); width: 37.5%;" value="Accept" onClick="">
+        <input type="button" style="background-color: rgb(187, 45, 10); width: 37.5%;" value="Hang up" onclick="location.replace('Welcome.html')">
+    </form>
+
+    <!-- The Modal -->
+    <div id="changePasscodeModal" class="modal">
+        <!-- Modal content -->
+        <div style="width: 40%" class="modal-content">
+            <h3>Change your passcode.</h3>
+            <form action="https://voicemailtest.herokuapp.com" method="post">
+                <input type="textfield" placeholder="New passcode">
+                <input type="submit" value="Accept" onClick="changePasscodePost()">
+                <input id="closePasscode" type="button" value="Cancel">
+            </form>            
+        </div>
+    </div>
+    <div id="changeGreetingModal" class="modal">
+        <!-- Modal content -->
+        <div style="width: 40%" class="modal-content">
+            <h3>Change your greeting.</h3>
+            <input type="textfield" placeholder="New greeting">
+            <input type="button" value="Accept" onClick="">
+            <input id="closeGreeting" type="button" value="Cancel">
+        </div>
+    </div>
+
+</body>
+<script>
+    // Get the modal
+    var modalPasscode = document.getElementById('changePasscodeModal');
+    var modalGreeting = document.getElementById('changeGreetingModal');
+    // Get the button that opens the modal
+    var botonPasscode = document.getElementById("botonChangePasscode");
+    var botonGreeting = document.getElementById("botonChangeGreeting");
+    // Get the <span> element that closes the modal
+    var spanPasscode = document.getElementById("closePasscode");
+    var spanGreeting = document.getElementById("closeGreeting");
+    // When the user clicks the button, open the modal 
+    botonPasscode.onclick = function () {
+        modalPasscode.style.display = "block";
+    }
+    botonGreeting.onclick = function () {
+        modalGreeting.style.display = "block";
+    }
+    // When the user clicks on <span> (x), close the modal
+    spanPasscode.onclick = function () {
+        modalPasscode.style.display = "none";
+    }
+    spanGreeting.onclick = function () {
+        modalGreeting.style.display = "none";
+    }
+
+    changePasscodePost = function () {
+        const myRequest = new Request('https://voicemailtest.herokuapp.com', {
+            method: 'POST',
+            body: '{"foo":"bar"}'
+        });
+        const myURL = myRequest.url; // http://localhost/api
+        const myMethod = myRequest.method; // POST
+        const myCred = myRequest.credentials; // omit
+        const bodyUsed = myRequest.bodyUsed; // true
+    }
+</script>
+
+</html>

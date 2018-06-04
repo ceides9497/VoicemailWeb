@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Etiqueta para adaptar a @media -->
+    <LINK REL="stylesheet" TYPE="text/css" HREF="estilo.css">
+    <!-- Enlace hoja estilos -->
+    <title>Message Menu</title>
+</head>
+
+<body>
+    <center>
+        <h1>Voicemail</h1>
+    </center>
+    <br>
+    <br>
+    <form name="Voicemail">
+        <br>
+        <input type="button" id="botonCurrentMessage" style="width: 75%" value="Listen to the current message">
+        <br>
+        <input type="button" id="SaveCurrentMessage" style="width: 75%" value="Save the current message">
+        <br>
+        <input type="button" id="DeleteCurrentMessage" style="width: 75%" value="Delete the current message">
+        <br>
+        <input type="button" id="botonChangeGreeting" style="width: 75%" value="Return to the main menu" onclick="location.replace('MailboxMenu.html')">
+        <br>
+        <br>
+        <input type="button" style="background-color: rgb(10, 187, 49); width: 37.5%;" value="Accept" onClick="">
+        <input type="button" style="background-color: rgb(187, 45, 10); width: 37.5%;" value="Hang up" onclick="location.replace('Welcome.html')">
+    </form>
+
+    <!-- The Modal -->
+    <div id="currentMessageModal" class="modal">
+        <!-- Modal content -->
+        <div style="width: 40%" class="modal-content">
+            <p id="currentMessage"></p>
+            <input id="closecurrentMessageModal" type="button" value="Close">
+        </div>
+    </div>
+
+    <div id="SaveCurrentMessageModal" class="modal">
+        <!-- Modal content -->
+        <div style="width: 40%" class="modal-content">
+            <p>Save current Message Success.</p>
+            <input id="closeSaveMessageModal" type="button" value="Close">
+        </div>
+    </div>
+
+    <div id="DeleteCurrentMessageModal" class="modal">
+        <!-- Modal content -->
+        <div style="width: 40%" class="modal-content">
+            <p>Delete current Message Success</p>
+            <input id="closeDeletetMessageModal" type="button" value="Close">
+        </div>
+    </div>
+
+</body>
+<script>
+    // Get the modal
+    var modalCurrentMessage = document.getElementById('currentMessageModal');
+    var modalSaveMessage = document.getElementById('SaveCurrentMessageModal');
+    var modalDeleteMessage = document.getElementById('DeleteCurrentMessageModal');
+    // Get the button that opens the modal
+    var botonCurrentMessage = document.getElementById("botonCurrentMessage");
+    var botonSaveMessage = document.getElementById("SaveCurrentMessage");
+    var botonDeleteMessage = document.getElementById("DeleteCurrentMessage");
+    // Get the <span> element that closes the modal
+    var spanCurrentMessage = document.getElementById("closecurrentMessageModal");
+    var spanSaveMessage = document.getElementById("closeSaveMessageModal");
+    var spanDeleteMessage = document.getElementById("closeDeletetMessageModal");
+    // When the user clicks the button, open the modal 
+    botonCurrentMessage.onclick = function () {
+        var xmlHttp = new XMLHttpRequest();
+        xmlHttp.open("GET", "https://voicemailtest.herokuapp.com/test", false); // false for synchronous request
+        xmlHttp.send(null);
+        texto = xmlHttp.responseText;
+        alert(texto);
+        document.getElementById("currentMessage").innerHTML = xmlHttp.responseText;
+    }
+    botonSaveMessage.onclick = function () {
+        modalSaveMessage.style.display = "block";
+    }
+    botonDeleteMessage.onclick = function () {
+        modalDeleteMessage.style.display = "block";
+    }
+    // When the user clicks on <span> (x), close the modal
+    spanCurrentMessage.onclick = function () {
+        modalCurrentMessage.style.display = "none";
+    }
+    spanSaveMessage.onclick = function () {
+        modalSaveMessage.style.display = "none";
+    }
+    spanDeleteMessage.onclick = function () {
+        modalDeleteMessage.style.display = "none";
+    }
+</script>
+
+</html>
